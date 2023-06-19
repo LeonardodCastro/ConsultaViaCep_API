@@ -31,6 +31,9 @@ public class ViaCepService {
             }
             //TODO converter o objeto que esta chegando para o EnderecoModel
 
+
+
+
 //        EnderecoModel endereco = new Gson().fromJson(httpResponse.body(),EnderecoModel.class);
 //
 //        enderecoModel.setCep(endereco.getCep());
