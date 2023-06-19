@@ -29,9 +29,6 @@ public class ViaCepService {
                 httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             } catch (Exception e) {
             }
-
-
-
             //TODO converter o objeto que esta chegando para o EnderecoModel
 
 //        EnderecoModel endereco = new Gson().fromJson(httpResponse.body(),EnderecoModel.class);
