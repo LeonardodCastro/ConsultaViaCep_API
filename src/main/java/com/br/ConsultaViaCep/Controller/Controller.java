@@ -4,6 +4,7 @@ import com.br.ConsultaViaCep.Model.EnderecoModel;
 import com.br.ConsultaViaCep.Service.ViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -14,14 +15,8 @@ public class Controller {
     private ViaCepService viaCepService;
 
 
-    @GetMapping("/consulta")
-    public ViaCepService root(){
-        EnderecoModel endereco = new EnderecoModel();
-        endereco.setCep("06516001");
-//        return endereco;
-        return viaCepService;
-    }
-    public Controller(ViaCepService viaCepService) throws Exception {
-        this.viaCepService = viaCepService;
+    @GetMapping("/consulta/{cepRecebidoViaParametroNaURL}")
+    public EnderecoModel consultaDoCep(@PathVariable String cepRecebidoViaParametroNaURL){
+        return viaCepService.executaConsultaNoSiteDosCorreios(cepRecebidoViaParametroNaURL);
     }
 }
