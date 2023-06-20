@@ -1,7 +1,8 @@
 package com.br.ConsultaViaCep.Service;
 
 import com.br.ConsultaViaCep.Model.EnderecoModel;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -13,6 +14,7 @@ import java.net.http.HttpResponse;
 public class ViaCepService {
 
     public EnderecoModel executaConsultaNoSiteDosCorreios(String cepQueSeraConsultado) {
+
         EnderecoModel enderecoModel = new EnderecoModel();
 
         String endPoint = "https://viacep.com.br/ws/" + cepQueSeraConsultado + "/json/";
@@ -25,26 +27,13 @@ public class ViaCepService {
             httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
         }
-        //TODO converter o objeto que esta chegando para o EnderecoModel (done)
 
-
-        EnderecoModel endereco = new Gson().fromJson(httpResponse.body(), EnderecoModel.class);
-
-//            var endereco1 = new EnderecoModel();
-//        BeanUtils.copyProperties(httpResponse, enderecoModel);
-
-        enderecoModel.setCep(endereco.getCep());
-        enderecoModel.setLogradouro(endereco.getLogradouro());
-        enderecoModel.setComlemento(endereco.getComlemento());
-        enderecoModel.setBairro(endereco.getBairro());
-        enderecoModel.setLocalidade(endereco.getLocalidade());
-        enderecoModel.setUf(endereco.getUf());
-        enderecoModel.setIbge(endereco.getIbge());
-        enderecoModel.setGia(endereco.getGia());
-        enderecoModel.setDdd(endereco.getDdd());
-        enderecoModel.setSiafi(endereco.getSiafi());
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.readValue(httpResponse.body(),EnderecoModel.class);
+        } catch (JsonProcessingException e) {
+            System.out.println("Deu erro aqui!");
+        }
         return enderecoModel;
-//        return endereco1;
     }
 }

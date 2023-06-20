@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 
 @RestController
 public class Controller {
@@ -14,9 +15,13 @@ public class Controller {
     @Autowired
     private ViaCepService viaCepService;
 
+    File htmlFile = new File("");
 
-    @GetMapping("/consulta/{cepRecebidoViaParametroNaURL}")
-    public EnderecoModel consultaDoCep(@PathVariable String cepRecebidoViaParametroNaURL){
-        return viaCepService.executaConsultaNoSiteDosCorreios(cepRecebidoViaParametroNaURL);
+    @GetMapping("/consulta/{cep}")
+    public EnderecoModel consultaDoCep(@PathVariable String cep) {
+        EnderecoModel endereco = new EnderecoModel();
+        return viaCepService.executaConsultaNoSiteDosCorreios(cep);
+
+
     }
 }
