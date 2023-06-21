@@ -25,26 +25,20 @@ public class ViaCepService {
             httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
         }
-        //TODO converter o objeto que esta chegando para o EnderecoModel (done)
-
 
         EnderecoModel endereco = new Gson().fromJson(httpResponse.body(), EnderecoModel.class);
 
-//            var endereco1 = new EnderecoModel();
-//        BeanUtils.copyProperties(httpResponse, enderecoModel);
+            enderecoModel.setCep(endereco.getCep());
+            enderecoModel.setLogradouro(endereco.getLogradouro());
+            enderecoModel.setComlemento(endereco.getComlemento());
+            enderecoModel.setBairro(endereco.getBairro());
+            enderecoModel.setLocalidade(endereco.getLocalidade());
+            enderecoModel.setUf(endereco.getUf());
+            enderecoModel.setIbge(endereco.getIbge());
+            enderecoModel.setGia(endereco.getGia());
+            enderecoModel.setDdd(endereco.getDdd());
+            enderecoModel.setSiafi(endereco.getSiafi());
 
-        enderecoModel.setCep(endereco.getCep());
-        enderecoModel.setLogradouro(endereco.getLogradouro());
-        enderecoModel.setComlemento(endereco.getComlemento());
-        enderecoModel.setBairro(endereco.getBairro());
-        enderecoModel.setLocalidade(endereco.getLocalidade());
-        enderecoModel.setUf(endereco.getUf());
-        enderecoModel.setIbge(endereco.getIbge());
-        enderecoModel.setGia(endereco.getGia());
-        enderecoModel.setDdd(endereco.getDdd());
-        enderecoModel.setSiafi(endereco.getSiafi());
-
-        return enderecoModel;
-//        return endereco1;
+            return enderecoModel;
     }
 }
