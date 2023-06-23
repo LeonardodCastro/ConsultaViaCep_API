@@ -1,1 +1,1 @@
-web: java -jar build/libs/ConsultaViaCepApplication-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/ConsultaViaCep-0.0.1-SNAPSHOT.jar
